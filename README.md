@@ -1,2 +1,2 @@
 # FFTsSLURM
-Code for doing my FFTs on the HPC
+Code for doing my Van Allen probe burst FFTs on the HPC
