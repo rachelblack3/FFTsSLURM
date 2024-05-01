@@ -13,7 +13,9 @@ Therefore, this code currently:
 This process is in a wider loop specifiying the date range desried.
 
 The outer loop copying over the data and passing inforation to the SLURM script is in **main_script.sh**
+
 The SLURM script that parallelises the job by day and sends to the HPC is **proccessing_batch_file.sh**
+
 The python script performing the FFTs is **main_fft.py**, which also uses functions from **funcs_fft.py** and **global_use.py**
 
 The output files are of format:
