@@ -39,7 +39,7 @@ while [[ "$currdate" < "$enddate" ]]; do
 
     # take off 1 day from number of days as the array indicies in slurm script goes from 0 to numdays-1 
     numdays=`expr $((numdays-1))`
-    
+    echo "$numdays"
     ## Run actual sbatch processing code for each day of the month
     ## the --export options allows you to list bash varaiables that you wish to pass to the slurm script
     ## the --array option sets the slurm array, where each index is a day

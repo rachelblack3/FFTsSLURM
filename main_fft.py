@@ -1,6 +1,6 @@
 # other numerical tools
 import os
-os.environ["CDF_LIB"] = "/path/to/cdf/library/directory"
+os.environ["CDF_LIB"] = "/data/hpcdata/users/rablack75/cdf37_1-dist/lib"
 # for cdf reading
 from spacepy import pycdf
 
