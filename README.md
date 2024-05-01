@@ -18,9 +18,9 @@ The python script performing the FFTs is **main_fft.py**, which also uses functi
 
 The output files are of format:
 
-- **PSD_Kletzing_<datetime>.cdf**: The 0.468s FFTs
+- **PSD_Kletzing_{datetime}.cdf**: The 0.468s FFTs
 
-- **PSD_sliding_<datetime>.cdf**: The 0.03s FFTs
+- **PSD_sliding_{datetime}.cdf**: The 0.03s FFTs
 
 
 
