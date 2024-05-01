@@ -5,7 +5,7 @@ Code for doing my RBSP burst FFTs on the HPC
 The space on the HPC is limited. At one time, I have space for 160 GB of data. This corresponds to a month's worth of burst input (RBSP CDFs) and output (my FFT CDFs).
 Therefore, this code currently:
 
-  1. copies over a weeks's worth of data to the HPC data storage
+  1. copies over a weeks's worth of data to the HPC data storage (can easily do a month, was just testing out for timings...)
   2. performs the FFTs on these files (the code is parallelised in SLURM by sending each day to a different core)
   3. copies the output from the HPC data storage to my data storage
   4. and, finally, deletes all input/output from the HPC
