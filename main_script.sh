@@ -5,7 +5,7 @@ enddate="20130301"
 
 currdate=$startdate
 
-## Loop from the start to the end
+## Looping by month until enddate is reached
 while [[ "$currdate" < "$enddate" ]]; do
 
     ## Get the year and the month from the current date
@@ -17,20 +17,21 @@ while [[ "$currdate" < "$enddate" ]]; do
     HPCDATA='/data/hpcdata/users/rablack75/first_attempt/data'
     WORKSDATA='/data/spacecast/wave_database_v2/RBSP-A/L2/$year/$month/*'
 
-    ## copy all burst files from every day in given month
+    ## Copy all burst files from every day in a given month
     for i in $(seq 7)
     do
         scp -r /data/spacecast/wave_database_v2/RBSP-A/L2/$year/$month/0$i /data/hpcdata/users/rablack75/first_attempt/data
     done
 
+    ## Name variable containing all burst days
     Burst_days=(/data/hpcdata/users/rablack75/first_attempt/data/*) 
-    ## Get number of days in month                                     
+    ## Get number of days in month from length of burstdays                                     
     numdays=${#Burst_days[@]}                                                                                      
     
     ## create magnetometer folder
     mkdir -p /data/hpcdata/users/rablack75/first_attempt/data/magnetometer
     
-    ## copy over magnetometer data
+    ## copy over magnetometer data for the month 
     for i in $(seq $numdays)
     do
         scp -r /data/spacecast/wave_database_v2/RBSP-A/L3/$year/$month/0$i/rbsp-a_magnetometer_1sec-geo_emfisis-L3_*.cdf /data/hpcdata/users/rablack75/first_attempt/data/magnetometer
@@ -41,6 +42,7 @@ while [[ "$currdate" < "$enddate" ]]; do
     
     ## Run actual sbatch processing code for each day of the month
     ## the --export options allows you to list bash varaiables that you wish to pass to the slurm script
+    ## the --array option sets the slurm array, where each index is a day
     sbatch --array=0-$numdays --export=currdate=$currdate processing_batch_file.sh
 
     ## create folder for daily output
@@ -53,7 +55,7 @@ while [[ "$currdate" < "$enddate" ]]; do
     rm -rf /data/hpcdata/users/rablack75/first_attempt/data/*
     rm -rf /data/hpcdata/users/rablack75/first_attempt/output/*
 
-    ## Increment the date
+    ## Increment the date --> next month
     currdate=$(date -d "$currdate + 1month" +%Y%m%d)
 
 

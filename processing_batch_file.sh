@@ -1,17 +1,17 @@
 #!/bin/bash
-#SBATCH -o /data/hpcdata/users/rablack75/first_attempt/output/%a.out
-#SBATCH --error=/data/hpcdata/users/rablack75/first_attempt/output/%a.err
-#SBATCH -J printname
-#SBATCH --mem=10gb
-#SBATCH --time=00:10:00
-#SBATCH --mail-type=begin,end,fail
-#SBATCH --mail-user=rablack75@bas.ac.uk
-#SBATCH --partition=short
-#SBATCH --account=short 
-#SBATCH --wait                                                  
+#SBATCH -o /data/hpcdata/users/rablack75/first_attempt/output/%a.out                # output file 
+#SBATCH --error=/data/hpcdata/users/rablack75/first_attempt/output/%a.err           # error file
+#SBATCH -J dofft                                                                    # name the job 
+#SBATCH --mem=10gb                                                                  # the memory for each node
+#SBATCH --time=00:10:00                                                             # length of job
+#SBATCH --mail-type=begin,end,fail                                                  # email failure messages 
+#SBATCH --mail-user=rablack75@bas.ac.uk                                             # to my email 
+#SBATCH --partition=short                                                           # which nodes to use
+#SBATCH --account=short                                                             # on which account
+#SBATCH --wait                                                                      # wait until this script has finished running before starting any other process (e.g. in an outer bash script)                                     
 
-source /data/hpcdata/users/rablack75/burstenv/bin/activate                     # activate environment
+source /data/hpcdata/users/rablack75/burstenv/bin/activate                          # activate environment
 
-date=$(date -d "$currdate + ${SLURM_ARRAY_TASK_ID}day" +%Y%m%d)
+date=$(date -d "$currdate + ${SLURM_ARRAY_TASK_ID}day" +%Y%m%d)                     # setting the day using the ${SLURM_ARRAY_TASK_ID} as the index
 
-python /data/hpcdata/users/rablack75/first_attempt/main_fft.py ${date}
+python /data/hpcdata/users/rablack75/first_attempt/main_fft.py ${date}              # run python script on each day
