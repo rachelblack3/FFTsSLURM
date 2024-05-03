@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH -o /data/hpcdata/users/rablack75/first_attempt/output/%a.out                # output file 
 #SBATCH --error=/data/hpcdata/users/rablack75/first_attempt/output/%a.err           # error file
-#SBATCH -J dofft                                                                    # name the job 
+#SBATCH -J fft2months                                                                    # name the job 
 #SBATCH --mem=50gb                                                                  # the memory for each node
-#SBATCH --time=02:00:00                                                             # length of job
+#SBATCH --time=08:00:00                                                             # length of job
 #SBATCH --mail-type=begin,end,fail                                                  # email failure messages 
 #SBATCH --mail-user=rablack75@bas.ac.uk                                             # to my email 
 #SBATCH --partition=medium                                                          # which nodes to use

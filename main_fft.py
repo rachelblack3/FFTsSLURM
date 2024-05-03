@@ -117,9 +117,6 @@ if (no_cdf>0):
         no_rec = len(burst['Epoch'])
         burst_epoch = gl.get_epoch(burst['Epoch'])
 
-    
-        
-        print('found one')
         B_cal = burst['BCalibrationCoef']       # B callibration values (for each of 6500 frequencies, regulary spaced)
         df_cal = burst['CalFrequencies'][0]     # Frequency step size required for burst callibaration
         f_max = burst['CalFrequencies'][-1]     # Max frequency (where the receivers 'cuttoff')

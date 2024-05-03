@@ -1,7 +1,7 @@
 #!/bin/bash
 
-startdate="20130201"
-enddate="20130301"
+startdate="20120901"
+enddate="20121101"
 
 currdate=$startdate
 
@@ -18,14 +18,12 @@ while [[ "$currdate" < "$enddate" ]]; do
     WORKSDATA='/data/spacecast/wave_database_v2/RBSP-A/L2/$year/$month/*'
 
     ## Copy all burst files from every day in a given month
-    for i in $(seq 7)
-    do
-        scp -r /data/spacecast/wave_database_v2/RBSP-A/L2/$year/$month/0$i /data/hpcdata/users/rablack75/first_attempt/data
-    done
+    scp -r /data/spacecast/wave_database_v2/RBSP-A/L2/$year/$month/* /data/hpcdata/users/rablack75/first_attempt/data
+
 
     ## Name variable containing all burst days
     Burst_days=(/data/hpcdata/users/rablack75/first_attempt/data/*) 
-    ## Get number of days in month from length of burstdays                                     
+    ## Get number of days in month from length of Burst_days                                     
     numdays=${#Burst_days[@]}                                                                                      
     
     ## create magnetometer folder
@@ -34,7 +32,12 @@ while [[ "$currdate" < "$enddate" ]]; do
     ## copy over magnetometer data for the month 
     for i in $(seq $numdays)
     do
-        scp -r /data/spacecast/wave_database_v2/RBSP-A/L3/$year/$month/0$i/rbsp-a_magnetometer_1sec-geo_emfisis-L3_*.cdf /data/hpcdata/users/rablack75/first_attempt/data/magnetometer
+        if [ $i -lt 10 ]
+        then 
+            scp -r /data/spacecast/wave_database_v2/RBSP-A/L3/$year/$month/0$i/rbsp-a_magnetometer_1sec-geo_emfisis-L3_*.cdf /data/hpcdata/users/rablack75/first_attempt/data/magnetometer
+        else
+            scp -r /data/spacecast/wave_database_v2/RBSP-A/L3/$year/$month/$i/rbsp-a_magnetometer_1sec-geo_emfisis-L3_*.cdf /data/hpcdata/users/rablack75/first_attempt/data/magnetometer
+        fi
     done
 
     # take off 1 day from number of days as the array indicies in slurm script goes from 0 to numdays-1 
